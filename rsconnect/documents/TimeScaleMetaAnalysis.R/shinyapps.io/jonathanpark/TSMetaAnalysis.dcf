@@ -1,0 +1,13 @@
+name: TSMetaAnalysis
+title: TSMetaAnalysis
+username:
+account: jonathanpark
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9568454
+bundleId: 7541283
+url: https://jonathanpark.shinyapps.io/TSMetaAnalysis/
+when: 1691442688.06736
+lastSyncTime: 1691442688.06737
+asMultiple: FALSE
+asStatic: FALSE
