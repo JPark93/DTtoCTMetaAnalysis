@@ -134,14 +134,6 @@ A
 
 # 4. So... what is the optimal time scale? ----
 
-# delta_t where the CR is max
-(index_maxCR1 <- which.max(transforms[,2]))
-(index_maxCR2 <- which.max(transforms[,3]))
-(opt_dt <- delts[(index_maxCR1+index_maxCR2)/2])
-
-# JP - Couldn't optimal delta-t be where the average of the coefficients are the highest?
- opt_dt = delts[which.max(rowMeans(transforms[,2:3]))]
-
 # Plot OU by the estimated matrix
 delts = seq(0.0, 20, 0.1)
 transforms = matrix(NA, length(delts), ne^2)
@@ -150,6 +142,14 @@ for(i in delts){
   transforms[index,] = as.numeric(expm(est_A*i)) # dynamic factors in DT-framework
   index = index + 1
 }
+# delta_t where the CR is max
+(index_maxCR1 <- which.max(transforms[,2]))
+(index_maxCR2 <- which.max(transforms[,3]))
+(opt_dt <- delts[(index_maxCR1+index_maxCR2)/2])
+
+# JP - Couldn't optimal delta-t be where the average of the coefficients are the highest?
+ opt_dt = delts[which.max(rowMeans(transforms[,2:3]))]
+ 
 plot(delts, transforms[,1], type = 'l', ylim = c(0,1.1), lwd = 1.5, lty = 2)
 lines(delts, transforms[,2], type = 'l', col = 'red', lwd = 1.5)
 lines(delts, transforms[,3], type = 'l', col = 'blue', lwd = 1.5)
