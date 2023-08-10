@@ -106,6 +106,8 @@ plot(delts, transforms[,1], type = 'l', ylim = c(0,1.1), lwd = 1.5, lty = 2)
 lines(delts, transforms[,2], type = 'l', col = 'red', lwd = 1.5)
 lines(delts, transforms[,3], type = 'l', col = 'blue', lwd = 1.5)
 lines(delts, transforms[,4], type = 'l', col = 'darkgray', lwd = 1.5, lty = 2)
+opt_dtTRUE = delts[which.max(rowMeans(transforms[,2:3]))]
+
 
 # Add samples (3 studies; AR & CR parameters)
 for (i in 1:length(intervals)){
@@ -153,7 +155,7 @@ lines(delts, transforms[,2], type = 'l', col = 'red', lwd = 1.5)
 lines(delts, transforms[,3], type = 'l', col = 'blue', lwd = 1.5)
 lines(delts, transforms[,4], type = 'l', col = 'darkgray', lwd = 1.5, lty = 2)
 abline(v=opt_dt, lty=2)
-
+abline(v=opt_dtTRUE, lty=1)
 
 
 
