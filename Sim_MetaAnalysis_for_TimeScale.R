@@ -119,39 +119,13 @@ for (i in 1:length(intervals)){
 
 # 3. Use the DTmatrices as input for the optimization function to estimate the drift matrix ----
 
-# Initial values for optimization
-params = rnorm(4, 0, 0.1)
-# Objective Function to be Minimized
-eval_f0 <- function(params, matrices, deltas) {
-  # Reshape params into a matrix
-  #  target_matrix = drift matrix 
-  target_matrix <- matrix(params, nrow = length(params)/2, ncol = length(params)/2, byrow = TRUE)
-  # Compute the sum of absolute differences between matrices
-  distances = matrix(0, length(matrices), 1)
-  for(i in 1:length(matrices)){
-    distances[i,] = sum(abs(expm(target_matrix*deltas[[i]]) - matrices[[i]]))
-  }
-  distance = sum(distances)
-  return(distance)
-}
-# Options for nloptr
-opts = list("algorithm" = "NLOPT_LN_NELDERMEAD",
-            "xtol_rel" = 1e-6,
-            "maxeval" = 2000)
-# Running the Optimization
-output = nloptr(x0 = rnorm(4, 0, 0.1),  #starting values
-                eval_f = eval_f0, 
-                matrices = DTmatrices, 
-                deltas = intervals, 
-                opts = opts,
-                lb = rep(-2, 4), # the range can affect the quality
-                ub = rep(2, 4))
+est_A = dt2ct(matrices = DTmatrices, deltas = intervals, 
+              tol = 1e-6, eval = 2000, algorithm = 'NLOPT_LN_NELDERMEAD',
+              lb = NULL, ub = NULL)
 
 # Comparing estimated to true matrix, A
-(est_A = matrix(output$solution, 2, 2, byrow = TRUE))
+est_A
 A
-
-
 
 
 

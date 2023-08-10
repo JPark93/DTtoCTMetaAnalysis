@@ -10,7 +10,7 @@ dt2ct = function(matrices = NULL, deltas = NULL,
     ub = rep(2, nv)
   }
 # Initial values for optimization
-  params = rnorm(nv, 0, 0.1)
+  params = rnorm(nv^2, 0, 0.1)
 # Objective Function to be Minimized
   eval_f0 <- function(params, matrices, deltas) {
     # Reshape params into a matrix
@@ -25,7 +25,7 @@ dt2ct = function(matrices = NULL, deltas = NULL,
       return(distance)
     }
 # Options for nloptr
-  opts = list("algorithm" = "algorithm",
+  opts = list("algorithm" = algorithm,
               "xtol_rel" = tol,
               "maxeval" = eval)
 # Running the Optimization
@@ -34,8 +34,8 @@ dt2ct = function(matrices = NULL, deltas = NULL,
                   matrices = matrices, 
                   deltas = deltas, 
                   opts = opts,
-                  lb = rep(-2, nv), # the range can affect the quality
-                  ub = rep(2, nv))
+                  lb = rep(-2, nv^2), # the range can affect the quality
+                  ub = rep(2, nv^2))
 
 # Comparing estimated to true matrix, A
   est_A = matrix(output$solution, nv, nv, byrow = TRUE)
