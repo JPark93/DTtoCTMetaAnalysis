@@ -137,6 +137,8 @@ A
 (index_maxCR2 <- which.max(transforms[,3]))
 (opt_dt <- delts[(index_maxCR1+index_maxCR2)/2])
 
+# JP - Couldn't optimal delta-t be where the average of the coefficients are the highest?
+ opt_dt = delts[which.max(rowMeans(transforms[,2:3]))]
 
 # Plot OU by the estimated matrix
 delts = seq(0.0, 20, 0.1)
