@@ -52,8 +52,8 @@ dt2ct = function(matrices = NULL, deltas = NULL,
                   matrices = matrices, 
                   deltas = deltas, 
                   opts = opts,
-                  lb = rep(-2, nv^2), # the range can affect the quality
-                  ub = rep(2, nv^2))
+                  lb = lb, # the range can affect the quality
+                  ub = ub)
 
 # Comparing estimated to true matrix, A
   est_A = matrix(output$solution, nv, nv, byrow = TRUE)
